@@ -31,6 +31,12 @@ public class FilterTaskAuth extends OncePerRequestFilter {
           // Pegar a autenticação (usuário e senha)
           var authorization = request.getHeader("Authorization");
 
+          // Sem autenticação Basic, retorna 401
+          if (authorization == null || !authorization.startsWith("Basic")) {
+            response.sendError(401);
+            return;
+          }
+
           var authEncoded = authorization.substring("Basic".length()).trim();
 
           byte[] authDecode = Base64.getDecoder().decode(authEncoded);
@@ -48,9 +54,8 @@ public class FilterTaskAuth extends OncePerRequestFilter {
             // Validar senha
             var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
             if (passwordVerify.verified) {
-              // Segue viagem
               // Solicitar o ID do usuário
-              request.setAttribute("idUser", user.getId()); // nome, valor que será atribuído ao nome
+              request.setAttribute("idUser", user.getId());
               filterChain.doFilter(request, response);
             } else {
               response.sendError(401);

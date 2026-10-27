@@ -40,12 +40,3 @@ public class TaskModel {
   
 }
 
-/*
- * ID
- * Usuário (ID_USUÁRIO)
- * Descrição
- * Título
- * Data de início
- * Data de Término
- * Prioridade
- */

@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,8 @@ public class UserModel {
   @Column(unique = true)
   private String username;
   private String name;
+
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
   @CreationTimestamp
@@ -29,14 +33,3 @@ public class UserModel {
 
 }
 
-/*
-// setter - atribui o valor abaixo ao private String username acima
-public void setUsername(String username) {
-  this.username = username;
-}
-
-// getter - retorna o atributo
-public String getUsername() {
-  return username;
-}
-*/
