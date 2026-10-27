@@ -135,7 +135,7 @@ A API ficará disponível em `http://localhost:8080`.
 
 ```bash
 docker build -t todolist .
-docker run -p 8080:8080 todolist
+docker run --rm -p 8080:8080 --name todolist todolist
 ```
 
 ### Console do H2
